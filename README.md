@@ -221,15 +221,16 @@ To update Vocard or Lavalink containers, simply delete and re-create the contain
 ---
 ## How to update? (For Windows and Linux)
 ***Note: Make sure there are no personal files in the directory! Otherwise it will be deleted.***
-
+```
 #### Check the current version
-```python update.py -c```
+python update.py -c
 
 #### Install the latest version
-```python update.py -l```
+python update.py -l
 
 #### Install the specified version
-```python update.py -v VERSION```
+python update.py -v VERSION
 
 #### Install the beta version
-```python update.py -b```
+python update.py -b
+```
