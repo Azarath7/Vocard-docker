@@ -8,13 +8,10 @@ services:
         container_name: lavalink
         restart: unless-stopped
         environment:
+    #        More environment variables here: https://lavalink.dev/configuration/index.html#example-environment-variables
             - _JAVA_OPTIONS=-Xmx1G
             - SERVER_PORT=2333
-        volumes:
-            ## Use "./" if you want to create a mount from your current directory (where docker-compose.yml is located)
-            ## Having access to files INSIDE the container is complicated. Mount function is used to have access to certain container files or folders.
-            ## Read more: https://docs.docker.com/storage/bind-mounts/ 
-            - ./application.yml:/opt/Lavalink/application.yml
+            - LAVALINK_SERVER_PASSWORD=youshallnotpass
         networks:
             - vocardbot
         expose:
