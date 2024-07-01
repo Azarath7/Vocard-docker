@@ -11,7 +11,8 @@ services:
     #        More environment variables here: https://lavalink.dev/configuration/index.html#example-environment-variables
             - _JAVA_OPTIONS=-Xmx1G
             - SERVER_PORT=2333
-            - LAVALINK_SERVER_PASSWORD=youshallnotpass
+        volumes:
+      - ./application.yml:/opt/Lavalink/application.yml
         networks:
             - vocardbot
         expose:
