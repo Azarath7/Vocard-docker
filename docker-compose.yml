@@ -8,11 +8,10 @@ services:
         container_name: lavalink
         restart: unless-stopped
         environment:
-    #        More environment variables here: https://lavalink.dev/configuration/index.html#example-environment-variables
             - _JAVA_OPTIONS=-Xmx1G
             - SERVER_PORT=2333
         volumes:
-      - ./application.yml:/opt/Lavalink/application.yml
+            - ./application.yml:/opt/Lavalink/application.yml
         networks:
             - vocardbot
         expose:
@@ -40,13 +39,18 @@ services:
 
     vocard:
     ## Choco, you should add :latest tag istead of :v2.6.8 to your current build, so you won't have to rewrite docker-compose.yml after each update
-        image: ghcr.io/chocomeow/vocard:v2.6.8
-        container_name: vocard
+    container_name: vocard
+    ## Uncomment if you're going to use web dashboard.
+    #build:
+      #dockerfile: ./Dockerfile
         volumes:
             ## Use "./" if you want to create a mount from your current directory (where docker-compose.yml is located)
             ## Having access to files INSIDE the container is complicated. Mount function is used to have access to certain container files or folders.
             ## Read more: https://docs.docker.com/storage/bind-mounts/ 
             - ./settings.json:/app/settings.json
+            - ./logs/supervisor/:/var/log
+#        env_file:
+#            - .env
         environment:
             - TOKEN=XXXXXXXXXXXXXXXXXXXXXXXX.XXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXX
             - CLIENT_ID=123456789012345678
@@ -66,6 +70,7 @@ services:
             #     condition: service_started
         networks:
             - vocardbot
+        ## Uncomment if you're going to use web dashboard.
         #ports:
             #- 37123:37123
 
