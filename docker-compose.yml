@@ -66,8 +66,8 @@ services:
             #     condition: service_started
         networks:
             - vocardbot
-        #expose:
-            #- "37123"
+        #ports:
+            #- 37123:37123
 
 networks:
     vocardbot:
