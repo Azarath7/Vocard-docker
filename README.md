@@ -63,7 +63,7 @@ Place these files on your host machine.
 ## Configure Docker Compose:
 
 Edit `docker-compose.yml` and fill in the required [environment](Environments) values. These values are crucial for the bot to work.
-If you're going to use `web-dashboard` - uncomment `ports` directive for vocard service and fill `REDIRECT_URI` environment value in `docker-compose.yml
+If you're going to use `web-dashboard` - uncomment `ports` directive for vocard service and fill `REDIRECT_URI` environment value in `docker-compose.yml`
 
 ``` yaml
 networks:
