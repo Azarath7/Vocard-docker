@@ -13,16 +13,17 @@ Demo: [Discord Bot Demo](https://discord.com/api/oauth2/authorize?client_id=8903
 </a>
 
 # Table Of Contents
-- [Tutorial](#tutorial)
-- [Previews](#previews)
-  - [Discord Bot](#discord-bot)
-  - [Dashboard](#dashboard)
-- [Run the Project](#run-the-project)
-- [Requirements](#requirements)
-- [Quick Start](#quick-start)
-- [Configuration](#configuration)
-- [Docker installation](#docker-installation)
-- [How to update? (For Windows and Linux)](#how-to-update-for-windows-and-linux)
+
+1. [Introduction](#Vocard (Discord Music Bot))
+2. [Previews](#previews)
+    - [Discord Bot](#discord-bot)
+    - [Dashboard](#dashboard)
+3. [How to Install Vocard using Docker](#how-to-install-vocard-using-docker)
+    - [Download the necessary files](#download-the-necessary-files)
+    - [Configure Docker Compose](#configure-docker-compose)
+    - [Configure `settings.json` (optional)](#configure-settingsjson-optional)
+    - [Installation Steps](#installation-steps)
+    - [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -37,48 +38,40 @@ Demo: [Discord Bot Demo](https://discord.com/api/oauth2/authorize?client_id=8903
 <img src="https://github.com/ChocoMeow/Vocard/assets/94597336/53f31f9f-57c5-452c-8317-114125ddbf03">
 <img src="https://github.com/ChocoMeow/Vocard/assets/94597336/b2acd87a-e910-4247-8d5a-418f3782f63f">
 
-# Tutorial
-Click on the image below to watch the tutorial on Youtube.
-
-[![Discord Music Bot](https://img.youtube.com/vi/f_Z0RLRZzWw/maxresdefault.jpg)](https://www.youtube.com/watch?v=f_Z0RLRZzWw)
  
-## Run the Project
-[![Run on Repl.it](https://replit.com/badge/github/ChocoMeow/Vocard)](https://replit.com/new/github/ChocoMeow/Vocard)<br>
-[Run in Docker](#docker-installation)
+# How to Install Vocard using Docker
 
-## Requirements
-* [Python 3.10+](https://www.python.org/downloads/)
-* [Modules in requirements](https://github.com/ChocoMeow/Vocard/blob/main/requirements.txt)
-* [Lavalink Server (Requires 4.0.0+)](https://github.com/freyacodes/Lavalink)
-
-## Quick Start
-```sh
-git clone https://github.com/ChocoMeow/Vocard.git  #Clone the repository
-cd Vocard                                          #Go to the directory
-python -m pip install -r requirements.txt          #Install required packages
+## Download the necessary files:
+    docker-compose.yml
+    application.yml
+    settings.json
+Place these files on your host machine.
+        
+ Should look like this:
 ```
-After installing all packages, you must configure the bot before to start! [How To Configure](https://github.com/ChocoMeow/Vocard#configuration)<br />
-Start your bot with `python main.py`
-
-
-## Configuration
-1. **Rename `.env Example` to `.env` and fill all the values**
-```sh
-TOKEN = XXXXXXXXXXXXXXXXXXXXXXXX.XXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXX
-CLIENT_ID = 123456789012345678
-CLIENT_SECRET_ID = XXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXX
-SERCET_KEY = DASHBOARD_SERCET_KEY
-
-BUG_REPORT_CHANNEL_ID = 123456789012345678
-
-SPOTIFY_CLIENT_ID = 0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-SPOTIFY_CLIENT_SECRET = 0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-GENIUS_TOKEN = XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-MONGODB_URL = mongodb+srv://user:password@clusterURL
-MONGODB_NAME = Vocard
+### This folder will be your bot's configuration and log file directory.
+    /path/to/your/directory/
+    ├── docker-compose.yml
+    ├── application.yml
+    ├── settings.json
+    └── logs/
+        └── supervisor/
 ```
+`Ensure the /logs/supervisor/ folder is created within your chosen directory.`
+
+## Configure Docker Compose:
+
+Edit `docker-compose.yml` and fill in the required [environment](Environments) values. These values are crucial for the bot to work.
+If you're going to use `web-dashboard` - uncomment `ports` directive for vocard in `docker-compose.yml
+
+``` yaml
+networks:
+            - vocardbot
+        ## Uncomment if you're going to use web dashboard.
+        ports:
+            - 37123:37123
+```
+
 ### Environments
 | Values | Description |
 | --- | --- |
@@ -92,76 +85,13 @@ MONGODB_NAME = Vocard
 | GENIUS_TOKEN | Your genius api key [(Genius Lyrics API)](https://genius.com/api-clients) ***(optional)*** |
 | MONGODB_URL | Your Mongo datebase url [(Mongodb)](https://www.mongodb.com/) |
 | MONGODB_NAME | The datebase name that you created on [Mongodb](https://www.mongodb.com/) |
+| REDIRECT_URI | Redirect uri that you've specified on [Discord Developer Portal](https://discord.com/developers/applications) (optional only for non-dashboard build)|
 
-2. **Rename `settings Example.json` to `settings.json` and customize your settings**
-***(Note: Do not change any keys from `settings.json`)***
-```json
-{
-    "nodes": {
-        "DEFAULT": {
-            "host": "127.0.0.1",
-            "port": 2333,
-            "password": "password",
-            "secure": false,
-            "identifier": "DEFAULT"
-        }   
-    },
-    "prefix": "?",
-    "activity":[
-        {"listen": "/help"}
-    ],
-    "bot_access_user": [],
-    "embed_color":"0xb3b3b3",
-    "default_max_queue": 1000,
-    "lyrics_platform": "A_ZLyrics",
-    "ipc_server": {
-        "host": "127.0.0.1",
-        "port": 8000,
-        "enable": false
-    },
-    "sources_settings": ...
-    {},
-    "default_controller": {
-        "embeds": {
-            "active": {
-                "description": "**Now Playing: ```[@@track_name@@]```\nLink: [Click Me](@@track_url@@) | Requester: @@requester@@ | DJ: @@dj@@**",
-                "footer": {
-                    "text": "Queue Length: @@queue_length@@ | Duration: @@track_duration@@ | Volume: @@volume@@% {{loop_mode != 'Off' ?? | Repeat: @@loop_mode@@}}"
-                },
-                "image": "@@track_thumbnail@@",
-                "author": {
-                    "name": "Music Controller | @@channel_name@@",
-                    "icon_url": "@@bot_icon@@"
-                },
-                "color": "@@track_color@@"
-            },
-            "inactive": {
-                "header": {
-                    "title": "There are no songs playing right now"
-                },
-                "description": "[Support](@@server_invite_link@@) | [Invite](@@invite_link@@) | [Questionnaire](https://forms.gle/Qm8vjBfg2kp13YGD7)",
-                "image": "https://i.imgur.com/dIFBwU7.png",
-                "color": "@@default_embed_color@@"
-            }
-        },
-        "default_buttons": [
-            ["back", "resume", "skip", {"stop": "red"}, "add"],
-            ["tracks"]
-        ],
-        "disableButtonText": false
-    },
-    "cooldowns": {
-        "connect": [2, 30],
-        "playlist view": [1, 30]
-    },
-    "aliases": {
-        "connect": ["join"],
-        "leave": ["stop", "bye"],
-        "play": ["p"],
-        "view": ["v"]
-    }
-}
-```
+---
+
+### Configure `settings.json` (optional)
+
+#### Stock values are good to go, but if you want to customize your Vocard here is `settings.json` breakdown:
 * For `nodes` you have to provide host, port, password and identifier of the [Lavalink Server](https://github.com/freyacodes/Lavalink)
 * For `prefix` you can set the prefix of the bot. (If you don't provide any prefix, the bot will disable the message command).
 * For `activity` you can set the activity of the bot. [Example Here](https://github.com/ChocoMeow/Vocard/blob/main/PLACEHOLDERS.md#bot-activity-activity-are-updated-every-10-minutes)
@@ -176,51 +106,33 @@ MONGODB_NAME = Vocard
 * For `default_controller` you can set custom embeds and buttons in controller, [Example Here](https://github.com/ChocoMeow/Vocard/blob/main/PLACEHOLDERS.md#controller-embeds)
 
 
-## Docker installation
-To install Vocard using Docker, follow these steps:
+## Installation Steps:
 
-#### Download and Extract Vocard:
-Download the .zip file of Vocard from the [repository](https://github.com/ChocoMeow/Vocard) and extract it on your host machine.
+Open a terminal or SSH session on your host machine.
+Navigate to the directory where you saved the configuration files:
 
-#### Configure Docker:
-Adjust the docker-compose.yml file with the appropriate [environment](#environments) variables.
+`cd /path/to/your/directory/`
 
-#### Build Docker:
-Run the following commands in your terminal, or use the docker-compose.yml with the installation wizard (if available):
-```sh
-docker-compose build
-docker-compose up -d
-```
-#### Dashboard setup (Optional)
-Modify required files before you install the containers.
+Start the Docker containers in detached mode:
 
-Or you can add a docker volume ```./:/app``` in docker-compose.yml. <br>The volume ```./:/app``` in Docker basically connects the current directory on your computer (./) to a Vocard root directory named ```/app``` inside the Docker container. It's like a direct link that lets you work on files in your computer's current folder and have those changes affect what's happening inside the container. Changes will take an effect once container is restarted. 
 
-Open Vocard root directory
+`docker-compose up -d`
 
-- Make sure that port 37123 is open and not blocked by your firewall, as it will be used for the dashboard.
-- Open /web/webapp.py and set appropriate ```REDIRECT_URI``` value for your host.
-- In docker-compose.yml uncomment
-```sh
-#expose:
-    #- "37123"
-```
-- In settings.json set "enable" to "true"
-```json
- "ipc_server": {
-        "host": "0.0.0.0",
-        "port": 37121,
-        "enable": true
-    },
-```
-- Save changes and proceed with regular Docker installation.
+Installation usually takes just a few minutes. 
 
-### How to update containers
-To update Vocard or Lavalink containers, simply delete and re-create the containers using the already configured docker-compose.yml.
 
----
-## How to update? (For Windows and Linux)
-***Note: Make sure there are no personal files in the directory! Otherwise it will be deleted.***
+## Troubleshooting:
+
+### Vocard no connection to node:
+
+Note: Sometimes, the Vocard container might start before its dependencies (like Lavalink). If this occurs, manually restart the Vocard container - it should solve the issue
+
+    `docker-compose restart vocard`
+    
+If encountering issues, ensure ports specified in your docker-compose.yml are not already in use by other services.
+In your config directory check log files from /logs/...
+
+
 ```
 #### Check the current version
 python update.py -c
