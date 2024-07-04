@@ -2,15 +2,18 @@ version: "3.8"
 
 services:
     lavalink:
-    ## If having issues with latest lavalink package try this one instead:
-    ## ghcr.io/lavalink-devs/lavalink@sha256:1ad5dcdef90b6c98aaac948874de0a2d286914847fcc0a1b4a8c593f47cdbb45
-        image: ghcr.io/lavalink-devs/lavalink:latest
+        image: ghcr.io/azarath7/lavalink-jre22:latest
         container_name: lavalink
         restart: unless-stopped
         environment:
             - _JAVA_OPTIONS=-Xmx1G
+            - SERVER_ADDRESS=0.0.0.0
             - SERVER_PORT=2333
+            - LAVALINK_SERVER_PASSWORD=password
         volumes:
+            ## Use "./" if you want to create a mount from your current directory (where docker-compose.yml is located)
+            ## Having access to files INSIDE the container is complicated. Mount function is used to have access to certain container files or folders.
+            ## Read more: https://docs.docker.com/storage/bind-mounts/ 
             - ./application.yml:/opt/Lavalink/application.yml
         networks:
             - vocardbot
@@ -38,19 +41,11 @@ services:
     #     command: ["mongod", "--oplogSize=1024", "--wiredTigerCacheSizeGB=1", "--auth", "--noscripting"]
 
     vocard:
-    ## Choco, you should add :latest tag istead of :v2.6.8 to your current build, so you won't have to rewrite docker-compose.yml after each update
-    container_name: vocard
-    ## Uncomment if you're going to use web dashboard.
-    #build:
-      #dockerfile: ./Dockerfile
+        image: ghcr.io/azarath7/vocard-dashboard:latest
+        container_name: vocard
         volumes:
-            ## Use "./" if you want to create a mount from your current directory (where docker-compose.yml is located)
-            ## Having access to files INSIDE the container is complicated. Mount function is used to have access to certain container files or folders.
-            ## Read more: https://docs.docker.com/storage/bind-mounts/ 
             - ./settings.json:/app/settings.json
             - ./logs/supervisor/:/var/log
-#        env_file:
-#            - .env
         environment:
             - TOKEN=XXXXXXXXXXXXXXXXXXXXXXXX.XXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXX
             - CLIENT_ID=123456789012345678
@@ -61,7 +56,8 @@ services:
             - SPOTIFY_CLIENT_SECRET=0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             - GENIUS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
             - MONGODB_URL=mongodb+srv://user:password@clusterURL
-            - MONGODB_NAME=Vocard
+            - MONGODB_NAME=YOUR_MONGODB_NAME
+            - REDIRECT_URI=http://YOUR_PUBLIC_IP:37123
 
         depends_on:
             lavalink:
@@ -70,7 +66,6 @@ services:
             #     condition: service_started
         networks:
             - vocardbot
-        ## Uncomment if you're going to use web dashboard.
         #ports:
             #- 37123:37123
 
