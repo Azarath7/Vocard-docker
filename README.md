@@ -125,9 +125,9 @@ Installation usually takes just a few minutes.
 
 ## Troubleshooting:
 
-### Vocard no connection to node:
+### Vocard can't connect to the node:
 
-Note: Sometimes, the Vocard container might start before its dependencies (like Lavalink). If this occurs, manually restart the Vocard container - it should solve the issue
+Note: Sometimes, the Vocard container might start before its dependencies (like Lavalink). If this occurs, manually restart the Vocard container - it should solve the issue.
 
 `docker-compose restart vocard`
     
