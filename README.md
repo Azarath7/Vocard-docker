@@ -38,6 +38,7 @@ Demo: [Discord Bot Demo](https://discord.com/api/oauth2/authorize?client_id=8903
 <img src="https://github.com/ChocoMeow/Vocard/assets/94597336/53f31f9f-57c5-452c-8317-114125ddbf03">
 <img src="https://github.com/ChocoMeow/Vocard/assets/94597336/b2acd87a-e910-4247-8d5a-418f3782f63f">
 
+---
  
 # How to Install Vocard using Docker
 
@@ -120,6 +121,7 @@ Start the Docker containers in detached mode:
 
 Installation usually takes just a few minutes. 
 
+---
 
 ## Troubleshooting:
 
@@ -127,7 +129,7 @@ Installation usually takes just a few minutes.
 
 Note: Sometimes, the Vocard container might start before its dependencies (like Lavalink). If this occurs, manually restart the Vocard container - it should solve the issue
 
-    `docker-compose restart vocard`
+`docker-compose restart vocard`
     
 If encountering issues, ensure ports specified in your docker-compose.yml are not already in use by other services.
 In your config directory check log files from /logs/...
