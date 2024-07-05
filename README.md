@@ -144,18 +144,3 @@ Note: Sometimes, the Vocard container might start before its dependencies (like 
 `docker-compose restart vocard`
 
 Re-check lavalink password and port in `docker-compose.yml` and `settings.json`   
-
-
-```
-#### Check the current version
-python update.py -c
-
-#### Install the latest version
-python update.py -l
-
-#### Install the specified version
-python update.py -v VERSION
-
-#### Install the beta version
-python update.py -b
-```
