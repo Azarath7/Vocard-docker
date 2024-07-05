@@ -132,9 +132,9 @@ Here is an [official Portainer guide](https://docs.portainer.io/user/docker/stac
 ## Troubleshooting:
 
 If you encounter issues related to the dashboard connection - ensure that __ports__ specified in your `docker-compose.yml` __are not in use__ by other services.
-In your config directory check log files from /logs/...
+In your config directory check Vocard log files from /logs/...
 
-Alternatively, you can run this command in host SSH: `docker logs -f container_name`
+For __Lavalink__ logs, you can run the following command in the host SSH: `docker logs -f lavalink`
 
 ---
 
