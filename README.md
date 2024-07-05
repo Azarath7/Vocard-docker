@@ -48,7 +48,7 @@ Demo: [Discord Bot Demo](https://discord.com/api/oauth2/authorize?client_id=8903
     docker-compose.yml
     application.yml
     settings.json
-Place these files on your host machine.
+Put these files on your host machine.
         
  Should look like this:
 ```
@@ -64,8 +64,8 @@ Place these files on your host machine.
 
 ## Configure Docker Compose:
 
-Edit `docker-compose.yml` and fill in the required [environment](Environments) values. These values are crucial for the bot to work.
-If you're going to use `web-dashboard` - uncomment `ports` directive for vocard service and fill `REDIRECT_URI` environment value in `docker-compose.yml`
+Edit `docker-compose.yml` and fill in the required [environment](Environments) values. These values are __crucial__ for the bot to work.
+If you're going to use the `web-dashboard`, uncomment the ports directive for the vocard service and set the `REDIRECT_URI` environment variable in the `docker-compose.yml` file.
 
 ``` yaml
 networks:
