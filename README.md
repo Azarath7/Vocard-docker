@@ -130,7 +130,8 @@ Here is an [official Portainer guide](https://docs.portainer.io/user/docker/stac
 
 
 ## Troubleshooting:
-If encountering issues, ensure ports specified in your docker-compose.yml are not already in use by other services.
+
+If you encounter issues related to the dashboard connection - ensure that __ports__ specified in your `docker-compose.yml` __are not in use__ by other services.
 In your config directory check log files from /logs/...
 
 Alternatively, you can run this command in host SSH: `docker logs -f container_name`
@@ -139,8 +140,8 @@ Alternatively, you can run this command in host SSH: `docker logs -f container_n
 
 ### Vocard can't connect to the node:
 
-Note: Sometimes, the Vocard container might start before its dependencies (like Lavalink). If this occurs, manually restart the Vocard container - it should solve the issue.
+__Note__: Sometimes the Vocard container might start before its dependencies (like Lavalink). If this happens, manually restarting the Vocard container should resolve the issue.
 
 `docker-compose restart vocard`
 
-Re-check lavalink password and port in `docker-compose.yml` and `settings.json`   
+Re-check lavalink __password__ and __port__ in `docker-compose.yml` and `settings.json`   
