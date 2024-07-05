@@ -14,7 +14,7 @@ Demo: [Discord Bot Demo](https://discord.com/api/oauth2/authorize?client_id=8903
 
 # Table Of Contents
 
-1. [Introduction](#Vocard (Discord Music Bot))
+1. [Introduction](#introduction)
 2. [Previews](#previews)
     - [Discord Bot](#discord-bot)
     - [Dashboard](#dashboard)
@@ -22,7 +22,9 @@ Demo: [Discord Bot Demo](https://discord.com/api/oauth2/authorize?client_id=8903
     - [Download the necessary files](#download-the-necessary-files)
     - [Configure Docker Compose](#configure-docker-compose)
     - [Configure `settings.json` (optional)](#configure-settingsjson-optional)
-    - [Installation Steps](#installation-steps)
+    - [Installation options](#installation-options)
+        - [SSH installation](#1-ssh-installation)
+        - [Portainer stack installation](#2-portainer-stack-installation)
     - [Troubleshooting](#troubleshooting)
 
 ---
@@ -107,7 +109,9 @@ networks:
 * For `default_controller` you can set custom embeds and buttons in controller, [Example Here](https://github.com/ChocoMeow/Vocard/blob/main/PLACEHOLDERS.md#controller-embeds)
 
 
-## Installation Steps:
+## Installation options:
+
+### 1. SSH installation
 
 Open a terminal or SSH session on your host machine.
 Navigate to the directory where you saved the configuration files:
@@ -116,23 +120,30 @@ Navigate to the directory where you saved the configuration files:
 
 Start the Docker containers in detached mode:
 
-
 `docker-compose up -d`
 
 Installation usually takes just a few minutes. 
 
----
+### 2. Portainer stack installation
+
+Here is an [official Portainer guide](https://docs.portainer.io/user/docker/stacks/add) on how to install container stack. You can either copy contents of your `docker-compose.yml` and paste it to Portainer Web-editor or select a path to `docker-compose.yml` on your PC. 
+
 
 ## Troubleshooting:
+If encountering issues, ensure ports specified in your docker-compose.yml are not already in use by other services.
+In your config directory check log files from /logs/...
+
+Alternatively, you can run this command in host SSH: `docker logs -f container_name`
+
+---
 
 ### Vocard can't connect to the node:
 
 Note: Sometimes, the Vocard container might start before its dependencies (like Lavalink). If this occurs, manually restart the Vocard container - it should solve the issue.
 
 `docker-compose restart vocard`
-    
-If encountering issues, ensure ports specified in your docker-compose.yml are not already in use by other services.
-In your config directory check log files from /logs/...
+
+Re-check lavalink password and port in `docker-compose.yml` and `settings.json`   
 
 
 ```
