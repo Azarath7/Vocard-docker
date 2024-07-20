@@ -41,8 +41,8 @@ services:
     #     command: ["mongod", "--oplogSize=1024", "--wiredTigerCacheSizeGB=1", "--auth", "--noscripting"]
 
     vocard:
-        build:
-          dockerfile: ./Dockerfile
+        #build:
+          #dockerfile: ./Dockerfile
         image: ghcr.io/azarath7/vocard-dashboard:latest
         container_name: vocard
         volumes:
