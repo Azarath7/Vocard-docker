@@ -107,7 +107,7 @@ networks:
 * For `cooldowns` you can set a custom cooldown in the command. Example: `"command_name": [The total number of tokens available, The length of the cooldown period in seconds]`
 * For `aliases` you can set custom aliases in the command. Example: `"command_name": [alias1, alias2, ...]`
 * For `default_controller` you can set custom embeds and buttons in controller, [Example Here](https://github.com/ChocoMeow/Vocard/blob/main/PLACEHOLDERS.md#controller-embeds)
-* For `REDIRECT_URI` you have to set a callback URI to have access to your dashboard go to [Discord Developer Portal](https://discord.com/developers/applications), then choose your **Application**, then go to OAuth2 and in Redirects window enter your URI. It can be a domain name, or IP address.
+* For `REDIRECT_URI` you have to set a callback URI to have access to your dashboard. Go to [Discord Developer Portal](https://discord.com/developers/applications), then choose your **Application**, then go to **OAuth2** and in **Redirects** window enter your **URI**. It can be a domain name, or IP address.
 
 IMPORTANT NOTE: Ensure the `REDIRECT_URI` is identical in both the [Discord Developer Portal](https://discord.com/developers/applications) and the `docker-compose.yml` file.
 
