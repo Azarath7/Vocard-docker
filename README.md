@@ -49,8 +49,9 @@ Demo: [Discord Bot Demo](https://discord.com/api/oauth2/authorize?client_id=8903
     application.yml
     settings.json
 Put these files on your host machine.
+Create `/logs` folder with `/supervisor` subfolder inside.
         
- Should look like this:
+The end result should look like this:
 ```
 ### This folder will be your bot's configuration and log file directory.
     /path/to/your/directory/
@@ -117,7 +118,7 @@ IMPORTANT NOTE: Ensure the `REDIRECT_URI` is identical in both the [Discord Deve
 ### 1. SSH installation
 
 Open a terminal or SSH session on your host machine.
-Navigate to the directory where you saved the configuration files:
+Navigate to the directory where you saved the configuration files with `docker-compose.yml`:
 
 `cd /path/to/your/directory/`
 
@@ -127,7 +128,7 @@ Start the Docker containers in detached mode:
 
 Installation usually takes just a few minutes. 
 
-### 2. Portainer stack installation
+### 2. Portainer stack installation(Tutorial not finished)
 
 Here is an [official Portainer guide](https://docs.portainer.io/user/docker/stacks/add) on how to install container stack. You can either copy contents of your `docker-compose.yml` and paste it to Portainer Web-editor or select a path to `docker-compose.yml` on your PC. 
 
@@ -147,4 +148,4 @@ __Note__: Sometimes the Vocard container might start before its dependencies (li
 
 `docker-compose restart vocard`
 
-Re-check lavalink __password__ and __port__ in `docker-compose.yml` and `settings.json`   
+Re-check lavalink __password__ and __port__ in `docker-compose.yml`, `application.yml` and `settings.json`   
